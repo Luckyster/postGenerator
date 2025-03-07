@@ -64,7 +64,7 @@ class SettingsPage {
                 <input type="text" id="user-prompt" placeholder="Enter a topic..." class="user-prompt"/>
                 <button id="submit-prompt" class="submit-prompt">Submit</button>
                 <div id="loading-spinner" class="loading-spinner">
-                    <img src="<?php echo plugin_dir_url(__DIR__) . 'assets/img/loader.gif'; ?>" alt="Loading..." width="35" height="35"/>
+                    <img src="<?php echo plugin_dir_url(__DIR__) . 'assets/img/loader.gif'; ?>" alt="Loading..." width="30" height="30"/>
                 </div>
             </div>
             <div id="response-message" class="response-message"></div>
