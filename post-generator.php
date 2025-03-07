@@ -1,10 +1,9 @@
 <?php
-
 /*
 Plugin Name: OpenAI Post Generator
 Description: A plugin for generating posts using the OpenAI API.
-Version: 0.1
-Author: Gleb
+Version: 1.0
+Author: Luckyster
 */
 
 if (!defined('ABSPATH')) {

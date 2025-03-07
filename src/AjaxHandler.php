@@ -22,7 +22,7 @@ class AjaxHandler {
 
         $client = new Client();
         $log_message = date("Y-m-d H:i:s") . " | Request prompt: " . $overall_prompt . "\n";
-        self::logToFile($log_message);
+        Logger::logToFile($log_message);
 
         try {
             $response = $client->post('https://api.openai.com/v1/chat/completions', [
@@ -39,7 +39,7 @@ class AjaxHandler {
                 ],
             ]);
             $body = json_decode($response->getBody(), true);
-            self::logToFile($body);
+            Logger::logToFile($body);
             $generated_text = isset($body['choices'][0]['message']['content'])
                 ? trim($body['choices'][0]['message']['content'])
                 : '';
