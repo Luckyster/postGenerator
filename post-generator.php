@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: OpenAI Post Generator
+Plugin Name: Post Generator
 Description: A plugin for generating posts using the OpenAI API.
 Version: 1.0
 Author: Luckyster
