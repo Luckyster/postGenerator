@@ -1,0 +1,14 @@
+{
+  "name": "luckyster/post-generator",
+  "description": "WordPress plugin for generating posts using OpenAI API",
+  "type": "wordpress-plugin",
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "erusev/parsedown": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "PostGenerator\\": "src/"
+    }
+  }
+}
