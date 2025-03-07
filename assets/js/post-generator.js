@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 loadingSpinner.classList.remove('active');
                 responseMessage.innerHTML = `<div class="error notice">Error</div>`;
-                console.error(error);
             });
     };
 

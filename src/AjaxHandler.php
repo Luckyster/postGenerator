@@ -2,6 +2,7 @@
 namespace PostGenerator;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 class AjaxHandler {
     public static function generatePost() {
@@ -63,23 +64,17 @@ class AjaxHandler {
             }
 
             wp_send_json_success(['message' => 'Post created successfully!', 'post_id' => $post_id]);
+        } catch (ClientException $e) {
+            if ($e->getResponse() && $e->getResponse()->getStatusCode() === 401) {
+                Logger::logToFile("Unauthorized: Incorrect API key provided. Error: " . $e);
+                wp_send_json_error(['message' => 'Unauthorized: Incorrect API key provided. Please check your API key in the Settings tab.']);
+            }
+            Logger::logToFile("Client error generating post: " . $e);
+            wp_send_json_error(['message' => 'Client error: ' . $e->getMessage()]);
         } catch (\Exception $e) {
-            $error_message = date("Y-m-d H:i:s") . " | Error: " . $e->getMessage() . "\n";
-            self::logToFile($error_message);
+            Logger::logToFile("Error generating post: " . $e);
             wp_send_json_error(['message' => 'An error occurred: ' . $e->getMessage()]);
         }
-    }
-
-    private static function logToFile($data) {
-        $log_file = plugin_dir_path(__DIR__, 1) . 'debug.log';
-        $timestamp = date("Y-m-d H:i:s");
-
-        if (!is_string($data)) {
-            $data = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        }
-
-        $message = "{$timestamp} | {$data}\n";
-        file_put_contents($log_file, $message, FILE_APPEND);
     }
 
 }
