@@ -66,13 +66,13 @@ class AjaxHandler {
             wp_send_json_success(['message' => 'Post created successfully!', 'post_id' => $post_id]);
         } catch (ClientException $e) {
             if ($e->getResponse() && $e->getResponse()->getStatusCode() === 401) {
-                Logger::logToFile("Unauthorized: Incorrect API key provided. Error: " . $e);
+                Logger::logToFile("Unauthorized: Incorrect API key provided. Error: " . $e->getMessage());
                 wp_send_json_error(['message' => 'Unauthorized: Incorrect API key provided. Please check your API key in the Settings tab.']);
             }
-            Logger::logToFile("Client error generating post: " . $e);
+            Logger::logToFile("Client error generating post: " . $e->getMessage());
             wp_send_json_error(['message' => 'Client error: ' . $e->getMessage()]);
         } catch (\Exception $e) {
-            Logger::logToFile("Error generating post: " . $e);
+            Logger::logToFile("Error generating post: " . $e->getMessage());
             wp_send_json_error(['message' => 'An error occurred: ' . $e->getMessage()]);
         }
     }
